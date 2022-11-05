@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\Masyarakat\MasyarakatController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,18 +16,17 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('pages.home');
-});
-
 Route::get('/form-pengaduan', function () {
     return view('pages.form');
 });
 
-Route::get('/login', function () {
-    return view('pages.login');
+Route::prefix('/auth')->group(function() {
+    Route::get('/register', [RegisterController::class, 'index'])->name('register.index');
+    Route::post('/register', [RegisterController::class, 'store'])->name('register.store');
+    Route::get('/login', [LoginController::class, 'index'])->name('login.index');
+    Route::post('/login', [LoginController::class, 'store'])->name('login.store');
+    Route::get('/logout', [LoginController::class, 'logout'])->name('logout.masyarakat');
 });
 
-Route::get('/register', function () {
-    return view('pages.register');
-});
+Route::resource('masyarakat', MasyarakatController::class);
+

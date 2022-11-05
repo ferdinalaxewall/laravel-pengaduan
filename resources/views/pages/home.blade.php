@@ -7,6 +7,11 @@
 
     <h4 align="center">
         <a href="/form-pengaduan">[+] Laporkan Pengaduan</a>
+        <a href="{{ route('logout.masyarakat') }}">Logout</a>
+    </h4>
+
+    <h4 align="center">
+        Wahai Sang Pengadu - {{ $nama }}
     </h4>
 
     <h3 align="center">Pengaduan & Tanggapan Pengaduan Anda:</h3>

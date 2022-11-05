@@ -41,6 +41,11 @@ return [
             'provider' => 'users',
         ],
 
+        'warga' => [
+            'driver' => 'session',
+            'provider' => 'masyarakat',
+        ],
+
         'api' => [
             'driver' => 'token',
             'provider' => 'users',
@@ -69,6 +74,11 @@ return [
         'users' => [
             'driver' => 'eloquent',
             'model' => App\Models\User::class,
+        ],
+
+        'masyarakat' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Masyarakat::class,
         ],
 
         // 'users' => [

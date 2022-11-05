@@ -1,12 +1,13 @@
 @extends('index')
 
-@section('content')    
+@section('content')
     <marquee direction="left" hspace="30%">
         <h1 align="center">Curhatan Masyarakat - Halaman Login</h1>
     </marquee>
 
     <table align="center">
-        <form action="">
+        <form action="" method="POST">
+            @csrf
             <tr align="left">
                 <th>Nama Pengguna :</th>
             </tr>
