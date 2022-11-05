@@ -15,7 +15,6 @@ class CreatePengaduansTable extends Migration
     {
         Schema::create('pengaduan', function (Blueprint $table) {
             $table->id('id_pengaduan');
-            $table->date('tgl_pengaduan');
             $table->foreignId('nik');
             $table->text('isi_laporan');
             $table->enum('status', ['proses', 'selesai']);
