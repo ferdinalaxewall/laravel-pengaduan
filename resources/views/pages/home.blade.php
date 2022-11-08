@@ -6,7 +6,10 @@
     </marquee>
 
     <h4 align="center">
-        <a href="/form-pengaduan">[+] Laporkan Pengaduan</a>
+        <a href="/pengaduan">[+] Laporkan Pengaduan</a>
+    </h4>
+
+    <h4 align="center">
         <a href="{{ route('logout.masyarakat') }}">Logout</a>
     </h4>
 
@@ -22,6 +25,21 @@
             <th>Tanggapan</th>
             <th>Pengaduan Dibuat</th>
             <th>Tanggapan Diberikan</th>
+            <th>Aksi</th>
         </tr>
+        @foreach ($pengaduans as $pengaduan)
+            <tr>
+                <td>{{ $loop->index+1 }}</td>
+                <td>{{ $pengaduan->isi_laporan }}</td>
+                <td> - </td>
+                <td>{{ $pengaduan->created_at }}</td>
+                <td> - </td>
+                <td>
+                    <a href="/pengaduan/{{ $pengaduan->id_pengaduan }}">Ubah</a>
+                    &nbsp; 
+                    <a href="/pengaduan/{{ $pengaduan->id_pengaduan }}">Hapus</a>
+                </td>
+            </tr>
+        @endforeach
     </table>
 @endsection

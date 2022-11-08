@@ -17,7 +17,7 @@ class CreateMasyarakatsTable extends Migration
             $table->id('nik');
             $table->string('nama', 35);
             $table->string('username', 25);
-            $table->string('password', 32);
+            $table->string('password', 255);
             $table->string('telp', 13);
             $table->timestamps();
         });

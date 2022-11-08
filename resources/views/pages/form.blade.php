@@ -10,14 +10,15 @@
             <fieldset>
                 <legend>Form Pengaduan</legend>
                 <br>
-                <form action="">
+                <form action="" method="POST">
+                    @csrf
                     <table>
                         <tr align="left">
                             <th>Isi Pengaduan :</th>
                         </tr>
                         <tr>
                             <td>
-                                <textarea name="isi_pengaduan" id="isi-pengaduan" cols="65" rows="5"></textarea>
+                                <textarea name="isi_laporan" id="isi-pengaduan" cols="65" rows="5"></textarea>
                             </td>
                         </tr>
                         <tr align="right">

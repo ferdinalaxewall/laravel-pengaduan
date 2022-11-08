@@ -1,14 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\Masyarakat;
+namespace App\Http\Controllers\Pengaduan;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class MasyarakatController extends Controller
+class PengaduanController extends Controller
 {
-    protected $getAuth;
-
     /**
      * Display a listing of the resource.
      *
@@ -16,15 +14,7 @@ class MasyarakatController extends Controller
      */
     public function index()
     {
-        $auth = $this->getAuth = auth('warga')->user();
-        $auth_name = $auth->nama;
-        $auth_nik = $auth->nik;
-        $data_pengaduan = $this->authBase->getPengaduan($auth_nik);
-
-        return view('pages.home', [
-            'nama' => $auth_name,
-            'pengaduans' => $data_pengaduan
-        ]);
+        return view('pages.form');
     }
 
     /**
@@ -34,7 +24,7 @@ class MasyarakatController extends Controller
      */
     public function create()
     {
-        //
+        return view('pages.form');
     }
 
     /**
@@ -45,7 +35,12 @@ class MasyarakatController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $auth = $this->getAuth = auth('warga')->user();
+        $request->nik = $auth->nik;
+        
+        $this->authBase->createPengaduan($request);
+
+        return redirect(route('masyarakat.index'))->withSuccess('Laporan anda berhasil Dikirim!');
     }
 
     /**

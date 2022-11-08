@@ -1,9 +1,10 @@
 <?php
 
+use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\Pengaduan\PengaduanController;
 use App\Http\Controllers\Masyarakat\MasyarakatController;
-use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,9 +17,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/form-pengaduan', function () {
-    return view('pages.form');
-});
 
 Route::prefix('/auth')->group(function() {
     Route::get('/register', [RegisterController::class, 'index'])->name('register.index');
@@ -28,5 +26,6 @@ Route::prefix('/auth')->group(function() {
     Route::get('/logout', [LoginController::class, 'logout'])->name('logout.masyarakat');
 });
 
-Route::resource('masyarakat', MasyarakatController::class);
 
+Route::resource('masyarakat', MasyarakatController::class);
+Route::resource('pengaduan', PengaduanController::class);

@@ -2,9 +2,10 @@
 
 namespace App\Repository\Implements;
 
+use Carbon\Carbon;
+use App\Models\Pengaduan;
 use App\Models\Masyarakat;
 use App\Repository\AuthInterface;
-use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
@@ -40,5 +41,22 @@ class AuthImplements implements AuthInterface
         $request->session()->invalidate();
 
         $request->session()->regenerateToken();
+    }
+
+    public function createPengaduan($request)
+    {
+        $model = new Pengaduan();
+        $model->nik = $request->nik;
+        $model->isi_laporan = $request->isi_laporan;
+        $model->status = "proses"; 
+        $model->created_at = Carbon::now();
+        $model->updated_at = Carbon::now();
+        return $model->save();
+    }
+
+    public function getPengaduan($id)
+    {
+        $data = Pengaduan::where('nik', $id)->get();
+        return $data;
     }
 }
