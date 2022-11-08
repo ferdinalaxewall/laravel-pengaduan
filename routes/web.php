@@ -29,5 +29,4 @@ Route::prefix('/auth')->group(function() {
 Route::prefix('/masyarakat')->group(function() {
     Route::get('/', [MasyarakatController::class, 'index'])->name('masyarakat.index');
     Route::resource('pengaduan', PengaduanController::class);
-    Route::get('/pengaduan/delete/{id}', [PengaduanController::class, 'destroy'])->name('pengaduan.delete');
 });

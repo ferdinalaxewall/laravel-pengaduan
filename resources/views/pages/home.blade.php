@@ -35,11 +35,28 @@
                 <td>{{ $pengaduan->created_at }}</td>
                 <td> - </td>
                 <td>
-                    <a href="/masyarakat/pengaduan/{{ Crypt::encrypt($pengaduan->id_pengaduan) }}">Ubah</a>
-                    &nbsp; 
-                    <a href="/masyarakat/pengaduan/delete/{{ Crypt::encrypt($pengaduan->id_pengaduan) }}">Hapus</a>
+                    <a href="{{ route('pengaduan.show', CryptHelper::diEnkrip($pengaduan->id_pengaduan)) }}">Ubah</a>
+                    &nbsp;
+                    <a href="{{ route('pengaduan.destroy', CryptHelper::diEnkrip($pengaduan->id_pengaduan)) }}" id="deleteData">Hapus</a>
+                    @include('actions.delete')
                 </td>
             </tr>
         @endforeach
     </table>
+@endsection
+
+@section('script')
+
+<script>
+$(document).ready(function() {
+    $('#deleteData').click(function(e) {
+        e.preventDefault()
+
+        let href = $(this).attr('href')
+
+        $('#formData').attr('action', href).submit()
+    })
+})
+</script>
+
 @endsection
