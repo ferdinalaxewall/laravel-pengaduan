@@ -11,4 +11,9 @@ class CryptHelper
     {
         return Crypt::encrypt($id);
     }
+
+    static function diDekrip($id)
+    {
+        return Crypt::decrypt($id);
+    }
 }

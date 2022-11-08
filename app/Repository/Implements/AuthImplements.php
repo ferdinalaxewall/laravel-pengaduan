@@ -5,10 +5,10 @@ namespace App\Repository\Implements;
 use Carbon\Carbon;
 use App\Models\Pengaduan;
 use App\Models\Masyarakat;
+use App\Helper\CryptHelper;
 use App\Repository\AuthInterface;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Crypt;
 
 class AuthImplements implements AuthInterface
 {
@@ -38,9 +38,7 @@ class AuthImplements implements AuthInterface
     public function logout($request)
     {
         Auth::guard('warga')->logout();
-
         $request->session()->invalidate();
-
         $request->session()->regenerateToken();
     }
 
@@ -63,20 +61,20 @@ class AuthImplements implements AuthInterface
 
     public function getPengaduanById($id)
     {
-        $id = Crypt::decrypt($id);
+        $id = CryptHelper::diDekrip($id);
         $data = Pengaduan::where('id_pengaduan', $id)->first();
         return $data;
     }
 
     public function updatePengaduan($id, $request)
     {   
-        $id = Crypt::decrypt($id);
+        $id = CryptHelper::diDekrip($id);
         Pengaduan::where('id_pengaduan', $id)->update(['isi_laporan' => $request->isi_laporan]);
     }
 
     public function deletePengaduan($id)
     {
-        $id = Crypt::decrypt($id);
+        $id = CryptHelper::diDekrip($id);
         Pengaduan::where('id_pengaduan', $id)->delete();
     }
 }

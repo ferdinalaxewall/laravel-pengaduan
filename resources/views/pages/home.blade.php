@@ -37,7 +37,7 @@
                 <td>
                     <a href="{{ route('pengaduan.show', CryptHelper::diEnkrip($pengaduan->id_pengaduan)) }}">Ubah</a>
                     &nbsp;
-                    <a href="{{ route('pengaduan.destroy', CryptHelper::diEnkrip($pengaduan->id_pengaduan)) }}" id="deleteData">Hapus</a>
+                    <a href="{{ route('pengaduan.destroy', CryptHelper::diEnkrip($pengaduan->id_pengaduan)) }}" onclick="deleteData(this, event)">Hapus</a>
                     @include('actions.delete')
                 </td>
             </tr>
@@ -48,15 +48,12 @@
 @section('script')
 
 <script>
-$(document).ready(function() {
-    $('#deleteData').click(function(e) {
-        e.preventDefault()
-
-        let href = $(this).attr('href')
+    function deleteData(element, event){
+        event.preventDefault();
+        let href = $(element).attr('href')
 
         $('#formData').attr('action', href).submit()
-    })
-})
+    }
 </script>
 
 @endsection
