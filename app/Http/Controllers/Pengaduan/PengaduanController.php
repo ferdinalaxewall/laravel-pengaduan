@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers\Pengaduan;
 
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class PengaduanController extends Controller
 {
@@ -24,7 +24,7 @@ class PengaduanController extends Controller
      */
     public function create()
     {
-        return view('pages.form');
+
     }
 
     /**
@@ -39,7 +39,6 @@ class PengaduanController extends Controller
         $request->nik = $auth->nik;
         
         $this->authBase->createPengaduan($request);
-
         return redirect(route('masyarakat.index'))->withSuccess('Laporan anda berhasil Dikirim!');
     }
 
@@ -51,7 +50,8 @@ class PengaduanController extends Controller
      */
     public function show($id)
     {
-        //
+        $data = $this->authBase->getPengaduanById($id);
+        return view('pages.form', compact('data'));
     }
 
     /**
@@ -62,7 +62,7 @@ class PengaduanController extends Controller
      */
     public function edit($id)
     {
-        //
+
     }
 
     /**
@@ -74,9 +74,10 @@ class PengaduanController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->authBase->updatePengaduan($id, $request);
+        return redirect(route('masyarakat.index'))->withSuccess('Laporan anda berhasil Diubah!');
     }
-
+    
     /**
      * Remove the specified resource from storage.
      *
@@ -85,6 +86,7 @@ class PengaduanController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $this->authBase->deletePengaduan($id);
+        return redirect(route('masyarakat.index'))->withSuccess('Laporan anda berhasil Dihapus!');
     }
 }

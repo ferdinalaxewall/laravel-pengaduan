@@ -6,7 +6,7 @@
     </marquee>
 
     <h4 align="center">
-        <a href="/pengaduan">[+] Laporkan Pengaduan</a>
+        <a href="{{ route('pengaduan.index') }}">[+] Laporkan Pengaduan</a>
     </h4>
 
     <h4 align="center">
@@ -35,9 +35,9 @@
                 <td>{{ $pengaduan->created_at }}</td>
                 <td> - </td>
                 <td>
-                    <a href="/pengaduan/{{ $pengaduan->id_pengaduan }}">Ubah</a>
+                    <a href="/masyarakat/pengaduan/{{ Crypt::encrypt($pengaduan->id_pengaduan) }}">Ubah</a>
                     &nbsp; 
-                    <a href="/pengaduan/{{ $pengaduan->id_pengaduan }}">Hapus</a>
+                    <a href="/masyarakat/pengaduan/delete/{{ Crypt::encrypt($pengaduan->id_pengaduan) }}">Hapus</a>
                 </td>
             </tr>
         @endforeach

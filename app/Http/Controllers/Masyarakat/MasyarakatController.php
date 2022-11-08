@@ -17,12 +17,10 @@ class MasyarakatController extends Controller
     public function index()
     {
         $auth = $this->getAuth = auth('warga')->user();
-        $auth_name = $auth->nama;
-        $auth_nik = $auth->nik;
-        $data_pengaduan = $this->authBase->getPengaduan($auth_nik);
+        $data_pengaduan = $this->authBase->getPengaduanByNik($auth->nik);
 
         return view('pages.home', [
-            'nama' => $auth_name,
+            'nama' => $auth->nama,
             'pengaduans' => $data_pengaduan
         ]);
     }

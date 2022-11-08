@@ -8,6 +8,7 @@ use App\Models\Masyarakat;
 use App\Repository\AuthInterface;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Crypt;
 
 class AuthImplements implements AuthInterface
 {
@@ -54,9 +55,28 @@ class AuthImplements implements AuthInterface
         return $model->save();
     }
 
-    public function getPengaduan($id)
+    public function getPengaduanByNik($nik)
     {
-        $data = Pengaduan::where('nik', $id)->get();
+        $data = Pengaduan::where('nik', $nik)->get();
         return $data;
+    }
+
+    public function getPengaduanById($id)
+    {
+        $id = Crypt::decrypt($id);
+        $data = Pengaduan::where('id_pengaduan', $id)->first();
+        return $data;
+    }
+
+    public function updatePengaduan($id, $request)
+    {   
+        $id = Crypt::decrypt($id);
+        Pengaduan::where('id_pengaduan', $id)->update(['isi_laporan' => $request->isi_laporan]);
+    }
+
+    public function deletePengaduan($id)
+    {
+        $id = Crypt::decrypt($id);
+        Pengaduan::where('id_pengaduan', $id)->delete();
     }
 }

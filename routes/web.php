@@ -26,6 +26,8 @@ Route::prefix('/auth')->group(function() {
     Route::get('/logout', [LoginController::class, 'logout'])->name('logout.masyarakat');
 });
 
-
-Route::resource('masyarakat', MasyarakatController::class);
-Route::resource('pengaduan', PengaduanController::class);
+Route::prefix('/masyarakat')->group(function() {
+    Route::get('/', [MasyarakatController::class, 'index'])->name('masyarakat.index');
+    Route::resource('pengaduan', PengaduanController::class);
+    Route::get('/pengaduan/delete/{id}', [PengaduanController::class, 'destroy'])->name('pengaduan.delete');
+});
