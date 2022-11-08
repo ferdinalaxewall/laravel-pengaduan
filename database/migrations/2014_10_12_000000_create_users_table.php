@@ -17,7 +17,7 @@ class CreateUsersTable extends Migration
             $table->id('id_petugas');
             $table->string('nama_petugas', 35);
             $table->string('username', 25);
-            $table->string('password', 32);
+            $table->string('password', 255);
             $table->string('telp', 32);
             $table->enum('level', ['admin', 'petugas']);
             $table->rememberToken();

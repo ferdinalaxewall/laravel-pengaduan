@@ -3,6 +3,7 @@
 namespace App\Repository\Implements;
 
 use Carbon\Carbon;
+use App\Models\User;
 use App\Models\Pengaduan;
 use App\Models\Masyarakat;
 use App\Helper\CryptHelper;
@@ -76,5 +77,31 @@ class AuthImplements implements AuthInterface
     {
         $id = CryptHelper::diDekrip($id);
         Pengaduan::where('id_pengaduan', $id)->delete();
+    }
+
+
+    public function registerAdmin($request)
+    {
+        $model = new User();
+        $model->created_at = Carbon::now();
+        $model->nama_petugas = $request->nama_petugas;
+        $model->username = $request->username;
+        $model->password = Hash::make($request->password);
+        $model->telp = $request->telp;
+        $model->level = $request->level;
+        return $model->save();
+    }
+
+    public function loginAdmin($request)
+    {
+        if (Auth::guard('admin')->attempt($request->validated())) {
+            $request->session()->regenerate();
+        } else {
+            return response()->json(['errors' => 'Username / Password Salah'], 400);
+        }
+    }
+
+    public function logoutAdmin($request){
+
     }
 }

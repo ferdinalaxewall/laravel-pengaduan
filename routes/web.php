@@ -2,7 +2,10 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\Auth\LoginAdminController;
+use App\Http\Controllers\Auth\RegisterAdminController;
 use App\Http\Controllers\Pengaduan\PengaduanController;
 use App\Http\Controllers\Masyarakat\MasyarakatController;
 
@@ -17,6 +20,14 @@ use App\Http\Controllers\Masyarakat\MasyarakatController;
 |
 */
 
+Route::prefix('/admin/auth')->group(function() {
+    Route::get('/register', [RegisterAdminController::class, 'index'])->name('register_admin.index');
+    Route::post('/register', [RegisterAdminController::class, 'store'])->name('register_admin.store');
+    Route::get('/login', [LoginAdminController::class, 'index'])->name('login_admin.index');
+    Route::post('/login', [LoginAdminController::class, 'store'])->name('login_admin.store');
+});
+
+Route::resource('admin', AdminController::class);
 
 Route::prefix('/auth')->group(function() {
     Route::get('/register', [RegisterController::class, 'index'])->name('register.index');
